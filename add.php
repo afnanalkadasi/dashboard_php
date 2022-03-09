@@ -1,10 +1,20 @@
 
 <?php
        
-       include('connection.php');
+      // Include database file
+  include 'product.php';
+
+  $productObj = new Product();
+
+  if(isset($_POST['submit'])) {
+    $productObj->insertData($_POST);
+  }
+
+
        include('header.php');
        
         ?>  
+        
    <!DOCTYPE html>
         <html>
         <head>
@@ -17,10 +27,10 @@
         <style>
         #page-wrapper {
     width: 60%;
-    padding: 15px 0 15px 30rem;
+    padding:  15px auto;
     background-color: #fff;
     border-radius: 20px;
-    margin: 30rem auto;
+    margin: 10rem auto;
 }
         </style>
        <body>
@@ -37,7 +47,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">CRUD Using PHP/MySQL</a>
         </div>
  
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
@@ -56,8 +65,8 @@
                     <br>
                     <br>
                     <li class="active">
-                        <a href="category.php" style=" font-size:20px; font-weight: bold; " > Category</a>
-                    </li>
+                    <a href="category_index.php" style=" font-size:20px; font-weight: bold; " > Category</a>
+                                        </li>
                 </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -75,7 +84,7 @@
               <h2>Add new Product</h2>
                   <div class="col-lg-6">
 
-                    <form role="form" method="post" action="transac.php?action=add">
+                    <form role="form" method="post" action="add.php">
                         
                         <div class="form-group">
                           <input class="form-control" placeholder="Product Name" name="productname">
@@ -86,8 +95,8 @@
                         <div class="form-group">
                           <input class="form-control" placeholder="price" name="price">
                         </div> 
-                       
-                        <button type="submit" class="btn btn-default">Save Record</button>
+
+                        <button type="submit" name="submit" class="btn btn-default">Save Product</button>
                         <button type="reset" class="btn btn-default">Clear Entry</button>
 
 

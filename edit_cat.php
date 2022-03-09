@@ -1,13 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-
 
 <?php
-       
-       include('connection.php');
-       include('header.php');
-       
-        ?>  
+  
+  // Include database file
+  include 'category.php';
+
+  $categoryObj = new Categories();
+
+  if(isset($_GET['editId']) && !empty($_GET['editId'])) {
+    $editId = $_GET['editId'];
+    $category =  $categoryObj->displyaCategoryById($editId);
+  }
+
+  if(isset($_POST['update'])) {
+    $categoryObj->updateCategory($_POST);
+  }  
+  include('header.php');
+?>
+
    <!DOCTYPE html>
         <html>
         <head>
@@ -20,10 +29,10 @@
         <style>
         #page-wrapper {
     width: 60%;
-    padding: 15px 0 15px 30rem;
+    padding:  15px auto;
     background-color: #fff;
     border-radius: 20px;
-    margin: 30rem auto;
+    margin: 10rem auto;
 }
         </style>
        <body>
@@ -40,7 +49,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="category.php">CRUD Using PHP/MySQL</a>
             </div>
      
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
@@ -59,8 +67,8 @@
                     <br>
                     <br>
                     <li class="active">
-                        <a href="category.php" style=" font-size:20px; font-weight: bold; " > Category</a>
-                    </li>
+                    <a href="category_index.php" style=" font-size:20px; font-weight: bold; " > Category</a>
+                                        </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -72,41 +80,24 @@
 
              
                 <!-- /.row -->
-<?php 
-$query = 'SELECT * FROM categories
-              WHERE
-              category_id ='.$_GET['id'];
-            $result = mysqli_query($db, $query) or die(mysqli_error($db));
-              while($row = mysqli_fetch_array($result))
-              {   
-                $zz= $row['category_id'];
-                $a=$row['Category_name'];
-            
-              
-              }
-              
-              $id = $_GET['id'];
-         
-?>
+
 
              <div class="col-lg-12">
                   <h2>Edit Category</h2>
                       <div class="col-lg-6">
 
-                        <form role="form" method="post" action="edit_cat1.php">
+                        <form role="form" method="post" action="edit_cat.php">
                             
                             <div class="form-group">
                                 <input type="hidden" name="id" value="<?php echo $zz; ?>" />
                             </div>
-                           
+                            
                             <div class="form-group">
-                              <input class="form-control" placeholder="Category Name" name="categoryname" value="<?php echo $a; ?>">
+                              <input class="form-control" placeholder="Category Name" name="uCategory_name"    value="<?php echo  $category['Category_name']; ?>">
                             </div> 
-                          
-                           
-                         
-
-                            <button type="submit" class="btn btn-default">Update Record</button>
+ 
+                            <!-- <input type="hidden" name="id" value="<?php echo  $category['category_id ']; ?>"> -->
+                            <button type="submit" name="update" class="btn btn-default">Update Category</button>
                          
 
 

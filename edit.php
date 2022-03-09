@@ -1,13 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-
 
 <?php
-       
-       include('connection.php');
-       include('header.php');
-       
-        ?>  
+  
+  // Include database file
+  include 'product.php';
+
+  $productObj = new Product();
+
+  if(isset($_GET['editId']) && !empty($_GET['editId'])) {
+    $editId = $_GET['editId'];
+    $product =  $productObj->displyaProductById($editId);
+  }
+
+  if(isset($_POST['update'])) {
+    $productObj->updateProduct($_POST);
+  }  
+  include('header.php');
+?>
+
    <!DOCTYPE html>
         <html>
         <head>
@@ -20,10 +29,10 @@
         <style>
         #page-wrapper {
     width: 60%;
-    padding: 15px 0 15px 30rem;
+    padding:  15px auto;
     background-color: #fff;
     border-radius: 20px;
-    margin: 30rem auto;
+    margin: 10rem auto;
 }
         </style>
        <body>
@@ -40,7 +49,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">CRUD Using PHP/MySQL</a>
             </div>
      
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
@@ -59,7 +67,7 @@
                     <br>
                     <br>
                     <li class="active">
-                        <a href="category.php" style=" font-size:20px; font-weight: bold; " > Category</a>
+                    <a href="category_index.php" style=" font-size:20px; font-weight: bold; " > Category</a>
                     </li>
                 </ul>
             </div>
@@ -72,47 +80,30 @@
 
              
                 <!-- /.row -->
-<?php 
-$query = 'SELECT * FROM Product
-              WHERE
-              Product_id ='.$_GET['id'];
-            $result = mysqli_query($db, $query) or die(mysqli_error($db));
-              while($row = mysqli_fetch_array($result))
-              {   
-                $zz= $row['Product_id'];
-                $i= $row['Product_name'];
-                $a=$row['Category_name'];
-                $b=$row['Price'];
-              
-             
-              }
-              
-              $id = $_GET['id'];
-         
-?>
+
 
              <div class="col-lg-12">
                   <h2>Edit Product</h2>
                       <div class="col-lg-6">
 
-                        <form role="form" method="post" action="edit1.php">
+                        <form role="form" method="post" action="edit.php">
                             
                             <div class="form-group">
                                 <input type="hidden" name="id" value="<?php echo $zz; ?>" />
                             </div>
                             <div class="form-group">
-                              <input class="form-control"  placeholder="Product Name" name="productname" value="<?php echo $i; ?>">
+                              <input class="form-control"  placeholder="Product Name" name="uProduct_name"  value="<?php echo  $product['Product_name']; ?>">
                             </div>
                             <div class="form-group">
-                              <input class="form-control" placeholder="Category Name" name="categoryname" value="<?php echo $a; ?>">
+                              <input class="form-control" placeholder="Category Name" name="uCategory_name"    value="<?php echo  $product['Category_name']; ?>">
                             </div> 
                             <div class="form-group">
-                              <input class="form-control" placeholder="price" name="price" value="<?php echo $b; ?>">
+                              <input class="form-control" placeholder="price" name="uPrice"  value="<?php echo  $product['Price']; ?>">
                             </div> 
-                           
+                     
                          
-
-                            <button type="submit" class="btn btn-default">Update Record</button>
+                            <input type="hidden" name="id" value="<?php echo  $product['Product_id']; ?>">
+                            <button type="submit" name="update" class="btn btn-default">Update Product</button>
                          
 
 

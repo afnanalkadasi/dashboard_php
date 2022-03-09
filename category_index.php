@@ -2,14 +2,14 @@
         <?php
   
   // Include database file
-  include 'product.php';
+  include 'category.php';
 
-  $productObj = new Product();
+  $categoryObj = new Categories();
 
-  // Delete Product from table
+  // Delete Category from table
   if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
       $deleteId = $_GET['deleteId'];
-      $productObj->deleteProduct($deleteId);
+      $categoryObj->deleteCategory($deleteId);
   }
   include('header.php');
   
@@ -68,13 +68,13 @@
                     <br>
                     <br>
                     <li class="active">
-                        <a href="#" style=" font-size:20px; font-weight: bold; " > Product</a>
+                        <a href="index.php" style=" font-size:20px; font-weight: bold; " > Product</a>
                     </li>
                     <br>
                     <br>
                     <br>
                     <li class="active">
-                        <a href="category_index.php" style=" font-size:20px; font-weight: bold; " > Category</a>
+                        <a href="#" style=" font-size:20px; font-weight: bold; " > Category</a>
                     </li>
                 </ul>
             </div>
@@ -100,7 +100,7 @@
     if (isset($_GET['msg3']) == "delete") {
       echo "<div class='alert alert-success alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert'>&times;</button>
-              Product deleted successfully
+              Category deleted successfully
             </div>";
     }
   ?>
@@ -108,41 +108,37 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                        Product                         </h1>
+                        Category                         </h1>
                        
                     </div>
                 </div>
 
 
              <div class="col-lg-12">
-                       <a href="add.php?action=add" type="button" class="btn btn-xs btn-info">Add New</a>
+                       <a href="addcat.php?action=addcat" type="button" class="btn btn-xs btn-info">Add New</a>
                                 
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Product id</th> 
-                                        <th>Product Name</th>
-                                        <th>Category Name</th>
-                                        <th>Price</th>
-                                       
+                                    <th>Category id</th>                                                                          
+                                        <th>Category Name</th>                                       
                                         <th>Options</th>
                                     </tr>
                                 </thead>
                                 <tbody>                 
                   <?php 
-          $products =  $productObj->displayData(); 
-          foreach ($products as $product) {
+          $categories =  $categoryObj->displayData(); 
+          foreach ($categories as $category) {
         ?>
         <tr>
-          <td><?php echo $product['Product_id'] ?></td>
-          <td><?php echo $product['Product_name'] ?></td>
-          <td><?php echo $product['Category_name'] ?></td>
-          <td><?php echo $product['Price'] ?></td>
+          <td><?php echo $category['category_id'] ?></td>
+          <td><?php echo $category['Category_name'] ?></td>
+          
           <td>
-            <a href="edit.php?editId=<?php echo $product['Product_id'] ?>" style="color:green">
+            <a href="edit_cat.php?editId=<?php echo $category['category_id'] ?>" style="color:green">
               <i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp
-            <a href="index.php?deleteId=<?php echo $product['Product_id'] ?>" style="color:red" onclick="confirm('Are you sure want to delete this Product')">
+            <a href="category_index.php?deleteId=<?php echo $category['category_id'] ?>" style="color:red" onclick="confirm('Are you sure want to delete this Category')">
               <i class="fa fa-trash" aria-hidden="true"></i>
             </a>
           </td>

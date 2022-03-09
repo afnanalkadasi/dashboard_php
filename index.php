@@ -49,7 +49,13 @@
                     <br>
                     <br>
                     <li class="active">
-                        <a href="index.php" style=" font-size:20px; font-weight: bold; " > Product</a>
+                        <a href="#" style=" font-size:20px; font-weight: bold; " > Product</a>
+                    </li>
+                    <br>
+                    <br>
+                    <br>
+                    <li class="active">
+                        <a href="category.php" style=" font-size:20px; font-weight: bold; " > Category</a>
                     </li>
                 </ul>
             </div>

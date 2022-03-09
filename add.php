@@ -42,12 +42,23 @@
  
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
-            <li class="active">
+        <ul class="nav navbar-nav side-nav">
+                    <li class="active">
                         <a href="index.php" style="color:#00e7ff; font-size:30px; "><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                
-            </ul>
+                    <br>
+                    <br>
+                    <br>
+                    <li class="active">
+                        <a href="index.php" style=" font-size:20px; font-weight: bold; " > Product</a>
+                    </li>
+                    <br>
+                    <br>
+                    <br>
+                    <li class="active">
+                        <a href="category.php" style=" font-size:20px; font-weight: bold; " > Category</a>
+                    </li>
+                </ul>
         </div>
         <!-- /.navbar-collapse -->
     </nav>
